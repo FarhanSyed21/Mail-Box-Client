@@ -4,7 +4,7 @@ import {Navbar, Container} from 'react-bootstrap'
 const NavBar = () => {
   return (
     <Fragment>  
-      <Navbar expand="lg" variant="dark" bg="dark">
+      <Navbar expand="lg" variant="dark" bg="primary">
       <Container fluid>
         <Navbar.Brand>Mail Box Client</Navbar.Brand>
       </Container>

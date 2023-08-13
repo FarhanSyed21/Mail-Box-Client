@@ -1,0 +1,76 @@
+.folder-list {
+    background-color: lightgray; 
+    padding: 10px;
+    min-height: 100vh;
+}
+  
+.folder-list .nav-link {
+    color: black;
+    padding: 10px 5px;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+  
+.folder-list .nav-link.active {
+    background-color: rgb(118, 200, 228); 
+    border-radius: 5px;
+    color: white; 
+ }
+  
+ .mail-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .checkbox,
+  .star {
+    margin-right: 10px;
+  }
+  
+  .snippet {
+    flex-grow: 1;
+    margin-right: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .details {
+    font-size: 0.8rem;
+    color: #777;
+  }
+
+  .expanded-content {
+    white-space: normal;
+    overflow: visible;
+  }
+
+  
+  .read{
+    list-style: none;
+    display: flex;
+    
+  }
+
+  .Unread{
+    font-weight: bolder;
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+  }
+  
+  .Unread::before{
+    content: "• ";
+  }
+
+  .Unread:hover{
+    background-color: #D3D3D3; 
+    cursor: pointer;
+  }
+
+  .sub:hover{
+    text-decoration: underline;
+  }
+  

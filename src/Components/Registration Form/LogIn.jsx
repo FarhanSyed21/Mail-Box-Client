@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router-dom'
 import NavBar from '../Navbar/NavBar';
 import { useDispatch } from "react-redux";
-import { authActions } from '../ReduxStore/store';
+import { authActions } from '../ReduxStore/auth';
 
 const LogIn = () => {
 
@@ -42,17 +42,15 @@ const LogIn = () => {
                     "Content-Type": "application/json"
                 }
             })
+            const data = await response.json();
                 if(response.ok){
-                    const data = await response.json();
                     dispatch(authActions.login({
                         email: data.email,
                         token: data.idToken
                     }))
                     navigate('/home')
-                    return response.json();
                 }else{
-                    const errorData = await response.json();
-                    throw new Error(errorData.error.message);
+                    throw new Error(data.error.message);
                 }
         
             }   catch(err) {
