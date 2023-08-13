@@ -1,7 +1,8 @@
 import LogIn from "./Components/Registration Form/LogIn";
 import SignUp from "./Components/Registration Form/SignUp";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./Components/Home";
+import Home from "./Components/Home/Home";
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 function App() {
   return (

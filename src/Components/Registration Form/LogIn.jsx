@@ -4,13 +4,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router-dom'
 import NavBar from '../Navbar/NavBar';
+import { useDispatch } from "react-redux";
+import { authActions } from '../ReduxStore/store';
 
 const LogIn = () => {
 
     const navigate = useNavigate()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const handleSubmit = (e) => {
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(email === "" || password ===""){
             toast.error('Please enter email and password!', {
@@ -25,52 +29,44 @@ const LogIn = () => {
             });
             return;
         }
+        try{
 
-        fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCrHf6mBaugVBBp3iRU03PWKO624o9NFQQ",{
-            method: "POST",
-            body: JSON.stringify({
-                email: email,
-                password: password,
-                returnSecureToken: true
-            }),
-            headers:{
-                "Content-Type": "application/json"
-            }
-        }).then((res) => {
-            if(res.ok){
-                navigate('/home')
-                return res.json();
-            }else{
-                return res.json().then((data) => {
-                    throw new Error(data.error.message);
+            const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCrHf6mBaugVBBp3iRU03PWKO624o9NFQQ",{
+                method: "POST",
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    returnSecureToken: true
+                }),
+                headers:{
+                    "Content-Type": "application/json"
+                }
+            })
+                if(response.ok){
+                    const data = await response.json();
+                    dispatch(authActions.login({
+                        email: data.email,
+                        token: data.idToken
+                    }))
+                    navigate('/home')
+                    return response.json();
+                }else{
+                    const errorData = await response.json();
+                    throw new Error(errorData.error.message);
+                }
+        
+            }   catch(err) {
+                toast.error(err.message, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
                 });
             }
-        })
-        .then((data) => {
-            toast.success("Successfully Logged In", {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored"
-            });
-        })
-        .catch((err) => {
-            toast.error(err.message, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
-        })
-
     }
   return (
     <Fragment>
