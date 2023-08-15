@@ -1,0 +1,6 @@
+.folder-list .nav-link.active {
+    background-color: rgb(118, 200, 228);
+    border-radius: 5px;
+    color: white;
+  }
+  

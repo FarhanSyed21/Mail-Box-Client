@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./auth";
-import mailReducer from './mailSlice'
+import mailReducer from "./mailSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -8,8 +8,7 @@ const rootReducer = combineReducers({
 });
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: rootReducer
 });
 
-console.log(store);
 export default store;
